@@ -1,0 +1,35 @@
+[tool.coverage.run]
+branch = true
+source = [ "src" ]
+
+[tool.coverage.report]
+exclude_lines = ['if TYPE_CHECKING:']
+show_missing = true
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-fail-under=100 --cov-report html:'../../coverage/apps/mcp/html' --cov-report xml:'../../coverage/apps/mcp/coverage.xml' --junitxml='../../reports/apps/mcp/unittests/junit.xml' --html='../../reports/apps/mcp/unittests/html/index.html'"
+
+[tool.poetry]
+name = "grabba-mcp"
+version = "0.0.2"
+description = ""
+authors = ["Bolu Agbana"]
+license = 'Proprietary'
+readme = 'README.md'
+
+  [[tool.poetry.packages]]
+  include = "src"
+
+  [tool.poetry.dependencies]
+  python = ">=3.10,<4.0"
+  pydantic-settings = "^2.9.1"
+  fastmcp = "^2.8.0"
+  grabba = "^0.0.10"
+
+  [tool.poetry.scripts]
+  grabba-mcp = "src.cli:run_cli"
+
+
+[build-system]
+requires = ["poetry-core==1.1.0"]
+build-backend = "poetry.core.masonry.api"

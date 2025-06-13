@@ -1,0 +1,143 @@
+{
+  "name": "mcp",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/mcp/src",
+  "targets": {
+    "docs": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "pydoc-markdown -p mcp --render-toc > docs/source/api.md",
+        "cwd": "apps/mcp"
+      }
+    },
+    "lock": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "poetry lock --no-update",
+        "cwd": "apps/mcp"
+      }
+    },
+    "add": {
+      "executor": "@nxlv/python:add",
+      "options": {}
+    },
+    "update": {
+      "executor": "@nxlv/python:update",
+      "options": {}
+    },
+    "remove": {
+      "executor": "@nxlv/python:remove",
+      "options": {}
+    },
+    "build": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "command": "poetry build",
+        "cwd": "apps/mcp"
+      }
+    },
+    "install": {
+      "executor": "@nxlv/python:install",
+      "options": {
+        "silent": false,
+        "args": "",
+        "cacheDir": ".cache/pypoetry",
+        "verbose": false,
+        "debug": false
+      }
+    },
+    "serve": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "python server.py",
+        "cwd": "apps/mcp/src"
+      }
+    },
+    "inspect": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "fastmcp dev server.py",
+        "cwd": "apps/mcp/src"
+      }
+    },
+    "patch": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "poetry version patch",
+        "cwd": "apps/mcp/src"
+      }
+    },
+    "publish": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "poetry publish && poetry version patch",
+        "cwd": "apps/mcp/src"
+      }
+    },
+    "lint": {
+      "executor": "@nxlv/python:flake8",
+      "outputs": ["{workspaceRoot}/reports/apps/mcp/pylint.txt"],
+      "options": {
+        "outputFile": "reports/apps/mcp/pylint.txt"
+      }
+    },
+    "test": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": [
+        "{workspaceRoot}/reports/apps/mcp/unittests",
+        "{workspaceRoot}/coverage/apps/mcp"
+      ],
+      "options": {
+        "command": "poetry run pytest tests/",
+        "cwd": "apps/mcp"
+      }
+    },
+    "tox": {
+      "executor": "@nxlv/python:tox",
+      "outputs": [
+        "{workspaceRoot}/reports/apps/mcp/unittests",
+        "{workspaceRoot}/coverage/apps/mcp"
+      ],
+      "options": {
+        "silent": false,
+        "args": ""
+      }
+    },
+    "docker-build": {
+      "dependsOn": [],
+      "command": "docker build -f apps/mcp/Dockerfile . -t dcr.svc.obaa.cloud/grabba-mcp:latest"
+    },
+    "docker-build-push": {
+      "dependsOn": [],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker build -f apps/mcp/Dockerfile . -t dcr.svc.obaa.cloud/grabba-mcp",
+          "docker push dcr.svc.obaa.cloud/grabba-mcp"
+        ]
+      }
+    },
+    "ci-docker-build": {
+      "dependsOn": [],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker build -f apps/mcp/Dockerfile . -t {args.registry}/grabba-mcp:{args.version}"
+        ]
+      }
+    },
+    "ci-docker-build-push": {
+      "dependsOn": [],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker build -f apps/mcp/Dockerfile . -t {args.registry}/grabba-mcp:{args.version}",
+          "docker push {args.registry}/grabba-mcp:{args.version}"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
