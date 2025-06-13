@@ -1,0 +1,87 @@
+# .gitignore for a FastAPI Project
+
+# --- Python specific ignores ---
+# Byte-code files
+*.pyc
+__pycache__/
+*.pyd
+*.pyo
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+*.whl
+
+# Virtual environment
+# This is crucial. Choose one of the common names for your virtual environment.
+# If you use 'venv' (common with 'python -m venv'):
+/venv/
+# If you use 'env' (sometimes used with 'conda' or custom setups):
+/env/
+# If you use 'poetry' (like in your project):
+.venv/
+# Other common names
+.direnv/
+.pyenv/
+.pip-modules/
+
+# Compiled native extensions (if your project uses any, e.g., via Cython)
+*.so
+*.dylib
+*.dll
+
+# Documentation generated files
+docs/_build/
+# You might want to ignore other documentation generation outputs
+
+# Test and coverage related files
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.nox/  # Nox automation tool
+.ruff_cache/ # Ruff linter cache
+
+# IDE and Editor specific files
+.idea/             # PyCharm, IntelliJ IDEA
+.vscode/           # VS Code
+*.iml              # IntelliJ IDEA module files
+.DS_Store          # macOS specific
+.vscodeignore      # VS Code specific, if you have one
+*.sublime-project
+*.sublime-workspace
+*.swp              # Vim swap files
+*.swo              # Vim swap files
+
+# Environment variables and sensitive files
+# IMPORTANT: Never commit your actual .env files with secrets!
+.env
+.env.*
+.flaskenv  # If you were mixing Flask/FastAPI
+.terraform.tfvars # If also using Terraform
+
+# Database files (if using SQLite or other file-based DBs)
+*.sqlite3
+*.db
+db.sqlite
+test.db # Common name for test databases
+
+# Log files
+*.log
+logs/
+
+# Docker specific ignores (if you build images locally and manage files)
+# Typically, Docker will copy only what's needed based on .dockerignore
+# but sometimes build artifacts might show up here.
+Dockerfile.bak
+docker-compose.override.yml # If you have a local override you don't commit
+!docker-compose.yml # Don't ignore the main compose file
+!Dockerfile # Don't ignore the main Dockerfile
+
+# Other miscellaneous generated files
+*/__pycache__/*
+.ipynb_checkpoints/ # Jupyter notebooks
+.ruff_cache/
+.ruff_formatter_cache/

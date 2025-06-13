@@ -1,0 +1,18 @@
+# Ignore .env files
+.env
+
+# Ignore any .env files in subdirectories (e.g., .env.development)
+**/.env*
+
+# Common exclusions
+.git
+.gitignore
+.vscode/
+__pycache__/
+*.pyc
+*.log
+venv/
+.mypy_cache/
+.pytest_cache/
+coverage/
+reports/
